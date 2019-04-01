@@ -44,12 +44,10 @@ public class PagamentoService {
 		Pagamento pag = new Pagamento(objDTO, ped);
 		pag = pagamentoRepository.save(pag);
 		
-		//ped.setPagamento(pag);	
-		
+				
 		pedidoRepository.save(pag.getPedido());
 		
-	//	System.out.println(pag);
-		//pag = pagamentoRepository.save(pag);
+
 			
 		return pag;
 	}
