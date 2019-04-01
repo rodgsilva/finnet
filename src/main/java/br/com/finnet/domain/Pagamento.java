@@ -8,9 +8,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+import javax.persistence.ManyToOne;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -21,17 +21,28 @@ public class Pagamento implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer idPagamento;
+	@JsonFormat(pattern="dd/MM/yyyy")
 	private Date dtPagamento;
 	private Integer estadoPagamento;
 	private String tipoPagamento;
 	
+
 	@JsonIgnore
-	@OneToOne
-	@JoinColumn(name="idPedido")
-	@MapsId
+	@ManyToOne
+	@JoinColumn(name="pedido")
 	private Pedido pedido;
 	
 	public Pagamento() {
+		
+	}
+	
+public Pagamento(PagamentoDTO objDTO, Pedido ped) {
+	this.idPagamento = objDTO.getIdPagamento();
+	this.dtPagamento = objDTO.getDtPagamento();
+	this.estadoPagamento = objDTO.getEstadoPagamento();
+	this.tipoPagamento = objDTO.getTipoPagamento();
+	this.pedido = ped;
+
 		
 	}
 	

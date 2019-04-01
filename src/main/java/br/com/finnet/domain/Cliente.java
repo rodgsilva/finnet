@@ -32,12 +32,11 @@ public class Cliente implements Serializable {
 		
 	}
 
-	public Cliente(Integer idCliente, String nomeCliente, Date dtNscCliente, List<Pedido> pedidos) {
+	public Cliente(Integer idCliente, String nomeCliente, Date dtNscCliente) {
 		super();
 		this.idCliente = idCliente;
 		this.nomeCliente = nomeCliente;
-		this.dtNscCliente = dtNscCliente;
-		this.pedidos = pedidos;
+		this.dtNscCliente = dtNscCliente;		
 	}
 
 	public Integer getIdCliente() {

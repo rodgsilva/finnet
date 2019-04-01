@@ -1,6 +1,8 @@
 package br.com.finnet.domain;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Entity;
@@ -9,7 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -30,20 +32,20 @@ public class Pedido {
 	private Cliente cliente;
 	
 	
-	@OneToOne(cascade=CascadeType.ALL, mappedBy="pedido")
-	private Pagamento pagamento;
+	@OneToMany( mappedBy="pedido",cascade=CascadeType.ALL)
+	private List<Pagamento> pagamento= new ArrayList<>();
 
 	public Pedido() {
 		
 	}
 
-	public Pedido(Integer idPedido, Date dtPedido, Integer itemPedido, Cliente cliente, Pagamento pagamento) {
+	public Pedido(Integer idPedido, Date dtPedido, Integer itemPedido, Cliente cliente) {
 		super();
 		this.idPedido = idPedido;
 		this.dtPedido = dtPedido;
 		this.itemPedido = itemPedido;
 		this.cliente = cliente;
-		this.pagamento = pagamento;
+	
 	}
 
 
@@ -86,16 +88,13 @@ public class Pedido {
 		this.cliente = cliente;
 	}
 
-
-	public Pagamento getPagamento() {
+	public List<Pagamento> getPagamento() {
 		return pagamento;
 	}
 
-
-	public void setPagamento(Pagamento pagamento) {
+	public void setPagamento(List<Pagamento> pagamento) {
 		this.pagamento = pagamento;
 	}
-
 
 	@Override
 	public String toString() {
